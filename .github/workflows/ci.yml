@@ -1,0 +1,13 @@
+name: Repro
+
+on: [push]
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v2
+      - run: cmake -B build -T v142
+      - run: cmake --build build --config Release
+      - run: ctest --test-dir build -C Release
